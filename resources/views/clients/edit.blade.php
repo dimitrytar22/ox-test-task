@@ -26,14 +26,15 @@
                            class="mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
                 @error('full_name')
-                    <x-input-error :messages="$message"/>
+                <x-input-error :messages="$message"/>
 
 
                 @enderror
 
                 <div class="flex flex-col">
                     <label for="email" class="text-gray-700 font-medium">Email</label>
-                    <input type="email" name="email" id="email" value="{{ old('email') ?? $client->email }}" placeholder="e.g. leanna.harber@kuhn.org"
+                    <input type="email" name="email" id="email" value="{{ old('email') ?? $client->email }}"
+                           placeholder="e.g. leanna.harber@kuhn.org"
                            class="mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
                 @error('email')
@@ -43,7 +44,8 @@
 
                 <div class="flex flex-col">
                     <label for="phone" class="text-gray-700 font-medium">Phone</label>
-                    <input type="text" name="phone" id="phone" value="{{ old('phone') ?? $client->phone }}" placeholder="Format e.g. +17188975450"
+                    <input type="text" name="phone" id="phone" value="{{ old('phone') ?? $client->phone }}"
+                           placeholder="Format e.g. +17188975450"
                            class="mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
                 @error('phone')
@@ -53,7 +55,8 @@
 
                 <div class="flex flex-col">
                     <label for="address" class="text-gray-700 font-medium">Address</label>
-                    <input type="text" name="address" id="address" value="{{ old('address') ?? $client->address }}" placeholder="e.g. 96173 Schmitt Junction Champlain, GA 61919"
+                    <input type="text" name="address" id="address" value="{{ old('address') ?? $client->address }}"
+                           placeholder="e.g. 96173 Schmitt Junction Champlain, GA 61919"
                            class="mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
                 @error('address')
@@ -66,16 +69,18 @@
                             class="w-full mt-4 p-3 text-white font-semibold rounded-lg bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
                         Save
                     </button>
-                    <form action="{{route('clients.destroy',$client->id)}}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                        <button type="submit"
-                                class="w-full mt-4 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                            Delete
-                        </button>
-                    </form>
+
+                    <button type="submit" form="delete-form"
+                            class="w-full mt-4 p-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        Delete
+                    </button>
                 </div>
             </form>
+            <form action="{{route('clients.destroy',$client->id)}}" id="delete-form" method="POST">
+                @csrf
+                @method("DELETE")
+            </form>
+
         </div>
     </div>
 @endsection

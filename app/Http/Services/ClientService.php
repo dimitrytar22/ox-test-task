@@ -29,6 +29,7 @@ class ClientService
     {
         $orders = $client->orders;
         foreach ($orders as $order){
+            $order->items()->detach();
             $order->delete();
         }
         $client->delete();
