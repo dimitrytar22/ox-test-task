@@ -19,4 +19,15 @@ class Order extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'items_order')
+            ->withPivot('quantity');
+    }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
 }

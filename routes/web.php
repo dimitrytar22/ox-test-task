@@ -29,7 +29,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
+Route::get('/asd', function (){
+    return 1;
+});
 Route::resource('clients', \App\Http\Controllers\ClientController::class);
+Route::resource('clients.orders', \App\Http\Controllers\OrderController::class)->shallow();
 
-
+Route::post('items/search',[\App\Http\Controllers\ItemController::class, 'search'])->name('items.search');
