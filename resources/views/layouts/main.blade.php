@@ -29,8 +29,11 @@
                 </button>
                 <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
                     <a href="{{route('profile.edit')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                    <a href="{{ route('logout') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
                 </div>
+                <form action="{{route('logout')}}" id="logout-form" method="POST">
+                    @csrf
+                </form>
             </div>
 
             <div class="md:hidden">
