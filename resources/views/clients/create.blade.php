@@ -29,7 +29,7 @@
 
                 <div class="flex flex-col">
                     <label for="email" class="text-gray-700 font-medium">Email</label>
-                    <input type="text" name="email" id="email" value="{{ old('email') }}"
+                    <input type="email" name="email" id="email" value="{{ old('email') }}"
                            placeholder="e.g. leanna.harber@kuhn.org"
                            class="mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>

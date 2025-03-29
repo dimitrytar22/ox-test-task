@@ -23,6 +23,16 @@ class StoreRequest extends FormRequest
     {
         return [
             'items' => 'required|json',
+            'status_id' => 'required|integer'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'items.required' => 'Items are required',
+            'status_id.required' => "Status is required",
+            'status_id.integer' => "Status id must be int"
         ];
     }
 }

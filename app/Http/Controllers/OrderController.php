@@ -36,7 +36,8 @@ class OrderController extends Controller
     public function create(Client $client)
     {
         $items = Item::all();
-        return view('clients.orders.create', compact('client', 'items'));
+        $statuses = Status::all();
+        return view('clients.orders.create', compact('client', 'items', 'statuses'));
     }
 
     /**

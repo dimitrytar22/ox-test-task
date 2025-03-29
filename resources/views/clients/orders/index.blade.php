@@ -34,6 +34,7 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-sm font-medium">ID</th>
                     <th class="px-6 py-3 text-left text-sm font-medium">Products</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium">Status</th>
                     <th class="px-6 py-3 text-left text-sm font-medium">Action</th>
                 </tr>
                 </thead>
@@ -44,13 +45,16 @@
 
                         <td class="px-6 py-4 text-sm text-gray-800">
                             @foreach($order->items as $item)
-                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50 shadow-sm">
+                                <div class="border border-gray-300 rounded-lg m-2 p-4 bg-gray-50 shadow-sm">
                                     <h4 class="text-md font-semibold text-gray-800">{{ $item->title }}</h4>
                                     <p class="text-gray-600">Price: {{ $item->price }}$</p>
                                     <p class="text-gray-600">Quantity: {{ $item->pivot->quantity }}</p>
                                 </div>
 
                             @endforeach
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-800">
+                                <p class="text-gray-600">{{ $order->status->title }}</p>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-800">
                             <div class="flex items-center gap-2">

@@ -18,7 +18,7 @@ class OrderService
 
         $order = Order::query()->create([
             'client_id' => $client->id,
-            'status_id' => Status::query()->where('title', 'awaiting payment')->first()->id,
+            'status_id' => $data['status_id'],
         ]);
 
         $items = json_decode($request->input('items'), true);

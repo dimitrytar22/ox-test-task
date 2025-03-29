@@ -28,6 +28,18 @@
                 </div>
 
                 <input type="hidden" name="items" id="items_json">
+                @error('items')
+                <x-input-error :messages="$message"/>
+                @enderror
+                <label for="status_id">Select Status</label>
+                <select name="status_id" id="status_id">
+                    @foreach($statuses as $status)
+                        <option value="{{$status->id}}">{{$status->title}}</option>
+                    @endforeach
+                </select>
+                @error('status_id')
+                <x-input-error :messages="$message"/>
+                @enderror
 
                 <div>
                     <button type="submit"
@@ -35,6 +47,7 @@
                         Create
                     </button>
                 </div>
+
             </form>
         </div>
     </div>

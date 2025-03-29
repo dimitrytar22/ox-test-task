@@ -42,36 +42,11 @@
                 </table>
             </div>
 
-            <div class="bg-gray-100 p-6 rounded-lg mt-6">
-                <h2 class="text-xl font-semibold text-gray-700 mb-3">Orders</h2>
-                <table class="w-full border border-gray-300 bg-white rounded-lg">
-                    <thead class="bg-gray-200">
-                    <tr>
-                        <th class="p-3 text-left font-semibold text-gray-700">ID</th>
-                        <th class="p-3 text-left font-semibold text-gray-700">Status</th>
-                        <th class="p-3 text-left font-semibold text-gray-700">Items</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($client->orders as $order)
-                        <tr class="border-b">
-                            <td class="p-3 text-gray-800 align-top">{{ $order->id }}</td>
-                            <td class="p-3 text-gray-800 align-top">{{ $order->status->title }}</td>
-                            <td class="p-3 text-gray-800">
-                                @if($order->items->isNotEmpty())
-                                    <ul class="list-disc list-inside">
-                                        @foreach($order->items as $item)
-                                            <li>{{ $item->title }}</li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <span class="text-gray-500">No items</span>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <div class="flex justify-between mt-6">
+                <a href="{{ route('clients.orders.index', $client->id) }}"
+                   class="px-5 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition">
+                    Orders
+                </a>
             </div>
 
             <div class="flex justify-between mt-6">
