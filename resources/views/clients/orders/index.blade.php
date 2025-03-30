@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+    <a href="{{ url()->previous() }}"
+       class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition">
+        ← Back
+    </a>
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-semibold text-gray-900 mb-6">Orders List of <b>{{$client->full_name}}</b></h1>
         @if(session()->has('success'))
@@ -18,9 +22,10 @@
 
                 <select
                     class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <option>All statuses</option>
-                    <option>Active</option>
-                    <option>Inactive</option>
+                    <option value="0">All statuses</option>
+                    @foreach($statuses as $status)
+                        <option value="{{$status->id}}">{{$status->title}}</option>
+                    @endforeach
                 </select>
             </div>
             <a href="{{route('clients.orders.create', $client->id)}}"

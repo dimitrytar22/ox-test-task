@@ -13,7 +13,7 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <h1 class="text-2xl font-semibold mb-6">Create Order</h1>
 
-            <form action="{{ route('clients.orders.store', $client->id) }}" method="POST" class="space-y-4">
+            <form id="order_form" action="{{ route('clients.orders.store', $client->id) }}" method="POST" class="space-y-4">
                 @csrf
 
                 <label for="item_search_input">Search Item</label>
@@ -23,14 +23,8 @@
 
                 <div id="item_results" class="mt-2"></div>
 
-                <div id="selected_items" class="mt-4">
-                    <!-- Items will be appended here -->
-                </div>
+                <div id="selected_items" class="mt-4"></div>
 
-                <input type="hidden" name="items" id="items_json">
-                @error('items')
-                <x-input-error :messages="$message"/>
-                @enderror
                 <label for="status_id">Select Status</label>
                 <select name="status_id" id="status_id">
                     @foreach($statuses as $status)
@@ -38,6 +32,14 @@
                     @endforeach
                 </select>
                 @error('status_id')
+                <x-input-error :messages="$message"/>
+                @enderror
+
+                <div>
+                    <label for="paid_at">Select date of paying</label>
+                    <input type="datetime-local" name="paid_at" value="">
+                </div>
+                @error('paid_at')
                 <x-input-error :messages="$message"/>
                 @enderror
 
@@ -84,34 +86,7 @@
                             div.classList.add('cursor-pointer', 'p-2', 'border', 'border-gray-300', 'rounded-md', 'mb-2');
                             div.textContent = `${item.title} (${item.price} $)`;
                             div.addEventListener('click', function () {
-                                let quantityInput = document.createElement('input');
-                                quantityInput.type = 'number';
-                                quantityInput.value = 1;
-                                quantityInput.min = 1;
-                                quantityInput.classList.add('w-16', 'mt-2', 'mr-2');
-                                quantityInput.addEventListener('change', function () {
-                                    updateItemQuantity(item.id, quantityInput.value);
-                                });
-
-                                let itemDiv = document.createElement('div');
-                                itemDiv.classList.add('flex', 'items-center', 'mb-4');
-                                itemDiv.textContent = `${item.title} (${item.price} $)`;
-
-                                itemDiv.appendChild(quantityInput);
-                                itemDiv.dataset.itemId = item.id;
-
-                                let removeBtn = document.createElement('button');
-                                removeBtn.innerHTML = '&times;';
-                                removeBtn.classList.add('ml-2', 'text-red-500', 'text-xl');
-                                removeBtn.addEventListener('click', function () {
-                                    removeItem(item.id);
-                                });
-
-                                itemDiv.appendChild(removeBtn);
-                                document.getElementById('selected_items').appendChild(itemDiv);
-
-                                selectedItems.push({ item_id: item.id, quantity: 1 });
-                                updateHiddenInput();
+                                addItem(item.id, item.title, item.price);
                             });
                             resultsContainer.appendChild(div);
                         });
@@ -124,24 +99,38 @@
             }
         });
 
-        function updateItemQuantity(itemId, quantity) {
-            const item = selectedItems.find(item => item.item_id === itemId);
-            if (item) {
-                item.quantity = parseInt(quantity);
-                updateHiddenInput();
+        function addItem(itemId, title, price) {
+            if (!selectedItems.some(item => item.item_id === itemId)) {
+                let itemDiv = document.createElement('div');
+                itemDiv.classList.add('flex', 'items-center', 'mb-4');
+                itemDiv.dataset.itemId = itemId;
+                itemDiv.innerHTML = `
+                    <span class="mr-2">${title} (${price} $)</span>
+                    <input type="hidden" name="items[${itemId}][item_id]" value="${itemId}">
+                    <input type="number" name="items[${itemId}][quantity]" value="1" min="1" data-item-id="${itemId}">
+                    <button type="button" class="ml-2 text-red-500 text-xl remove-item" data-item-id="${itemId}">&times;</button>
+                `;
+                document.getElementById('selected_items').appendChild(itemDiv);
+                selectedItems.push({ item_id: itemId, quantity: 1 });
             }
         }
 
-        function removeItem(itemId) {
-            selectedItems = selectedItems.filter(item => item.item_id !== itemId);
-            let itemDiv = document.querySelector(`[data-item-id="${itemId}"]`);
-            itemDiv.remove();
-            updateHiddenInput();
-        }
+        document.getElementById('selected_items').addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-item')) {
+                let itemId = parseInt(e.target.dataset.itemId);
+                selectedItems = selectedItems.filter(item => item.item_id !== itemId);
+                e.target.parentElement.remove();
+            }
+        });
 
-        function updateHiddenInput() {
-            // Here we update the hidden input with the selected items (array)
-            document.getElementById('items_json').value = JSON.stringify(selectedItems);
-        }
+        document.getElementById('selected_items').addEventListener('input', function (e) {
+            if (e.target.tagName.toLowerCase() === 'input' && e.target.type === 'number') {
+                let itemId = parseInt(e.target.dataset.itemId);
+                let item = selectedItems.find(item => item.item_id === itemId);
+                if (item) {
+                    item.quantity = parseInt(e.target.value);
+                }
+            }
+        });
     </script>
 @endsection

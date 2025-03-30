@@ -21,19 +21,30 @@ class OrderService
             'status_id' => $data['status_id'],
         ]);
 
-        $items = json_decode($request->input('items'), true);
+        $items = $data['items'];
 
         $itemsWithQuantity = [];
         foreach ($items as $item) {
             $itemsWithQuantity[$item['item_id']] = ['quantity' => $item['quantity']];
         }
-
+        $order->paid_at = $data['paid_at'];
+        $order->save();
         $order->items()->attach($itemsWithQuantity);
     }
 
     public function update(UpdateRequest $request, Order $order)
     {
+        $data = $request->validated();
 
+        $items = $data['items'];
+
+        $itemsWithQuantity = [];
+        foreach ($items as $item) {
+            $itemsWithQuantity[$item['item_id']] = ['quantity' => $item['quantity']];
+        }
+        $order->paid_at = $data['paid_at'];
+        $order->save();
+        $order->items()->sync($itemsWithQuantity);
     }
 
     public function destroy(Order $order)

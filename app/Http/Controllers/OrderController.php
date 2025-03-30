@@ -27,7 +27,8 @@ class OrderController extends Controller
     public function index(Client $client)
     {
         $orders = $client->orders()->paginate(20);
-        return view('clients.orders.index', compact( 'orders','client'));
+        $statuses = Status::all();
+        return view('clients.orders.index', compact( 'orders','client', 'statuses'));
     }
 
     /**
@@ -63,7 +64,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('orders.edit', compact('order'));
+        $statuses = Status::all();
+        return view('orders.edit', compact('order', 'statuses'));
     }
 
     /**
@@ -71,7 +73,8 @@ class OrderController extends Controller
      */
     public function update(UpdateRequest $request, Order $order)
     {
-
+        $this->service->update($request,$order);
+        return redirect()->route('clients.orders.index', $order->client->id)->with('success', "Order ID: $order->id updated successfully!");
     }
 
     /**

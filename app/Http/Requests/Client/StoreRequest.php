@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
         return [
             'full_name' => 'required|min:3|max:255',
             'email' => 'required|email|unique:clients',
-            'phone' => 'required|regex:/\+[0-9]{10}/|unique:clients',
+            'phone' => 'required|regex:/\+?[0-9]{10}/|unique:clients',
             'address' => 'required|max:255',
             'date_of_birth' => 'required|date'
         ];

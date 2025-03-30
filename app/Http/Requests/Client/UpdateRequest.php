@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
             ],
             'phone' => [
                 'required',
-                'regex:/\+[0-9]{10}/',
+                'regex:/\+?[0-9]{10}/',
                 Rule::unique('clients')->ignore($this->client->id, 'id')],
             'address' => 'required|max:255',
             'date_of_birth' => 'required|date'
