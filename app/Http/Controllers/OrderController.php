@@ -79,6 +79,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-
+        $this->service->destroy($order);
+        return redirect()->back()->with('success', "Successfully deleted order");
     }
 }

@@ -38,7 +38,8 @@ class OrderService
 
     public function destroy(Order $order)
     {
-
+        $order->items()->detach();
+        $order->delete();
     }
 
 

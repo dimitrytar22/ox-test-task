@@ -35,6 +35,8 @@
                     <th class="px-6 py-3 text-left text-sm font-medium">ID</th>
                     <th class="px-6 py-3 text-left text-sm font-medium">Products</th>
                     <th class="px-6 py-3 text-left text-sm font-medium">Status</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium">Paid at</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium">Created at</th>
                     <th class="px-6 py-3 text-left text-sm font-medium">Action</th>
                 </tr>
                 </thead>
@@ -57,12 +59,23 @@
                                 <p class="text-gray-600">{{ $order->status->title }}</p>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-800">
+                            @if($order->paid_at)
+                            <p class="text-gray-600">{{ $order->paid_at }}</p>
+                            @else
+                                <p class="text-gray-600">Not paid</p>
+
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-800">
+                            <p class="text-gray-600">{{ $order->created_at }}</p>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-800">
                             <div class="flex items-center gap-2">
                                 <a href="{{ route('orders.edit', $order->id) }}"
                                    class="px-2 py-1 bg-blue-500 text-white rounded-sm hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition">
                                     Edit
                                 </a>
-                                <form action="{{ route('clients.destroy', $order->id) }}" method="POST">
+                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
                                     @csrf
                                     @method("DELETE")
                                     <button type="submit"
