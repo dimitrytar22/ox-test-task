@@ -19,10 +19,11 @@ class ClientService
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        Client::query()->firstOrCreate([
-            'email',
-            'phone'
+        return Client::query()->firstOrCreate([
+            'email' => $data['email'],
+            'phone' => $data['phone'],
         ],$data);
+
     }
 
     public function destroy(Client $client)

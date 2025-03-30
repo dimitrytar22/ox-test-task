@@ -63,6 +63,16 @@
                 <x-input-error :messages="$message"/>
 
                 @enderror
+                <div class="flex flex-col">
+                    <label for="date_of_birth" class="text-gray-700 font-medium">Date of birth</label>
+                    <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') ?? $client->date_of_birth}}"
+                           placeholder="e.g. 96173 Schmitt Junction Champlain, GA 61919"
+                           class="mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                @error('date_of_birth')
+                <x-input-error :messages="$message"/>
+
+                @enderror
 
                 <div>
                     <button type="submit"

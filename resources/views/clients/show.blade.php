@@ -31,6 +31,10 @@
                         <td class="p-3 text-gray-800">{{ $client->address }}</td>
                     </tr>
                     <tr class="border-b">
+                        <td class="p-3 font-semibold text-gray-700">Birthday</td>
+                        <td class="p-3 text-gray-800">{{ $client->date_of_birth }}</td>
+                    </tr>
+                    <tr class="border-b">
                         <td class="p-3 font-semibold text-gray-700">Created At</td>
                         <td class="p-3 text-gray-800">{{ $client->created_at->format('d M, Y') }}</td>
                     </tr>

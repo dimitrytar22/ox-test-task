@@ -34,6 +34,8 @@ class UpdateRequest extends FormRequest
                 'regex:/\+[0-9]{10}/',
                 Rule::unique('clients')->ignore($this->client->id, 'id')],
             'address' => 'required|max:255',
+            'date_of_birth' => 'required|date'
+
         ];
     }
 
@@ -50,7 +52,9 @@ class UpdateRequest extends FormRequest
             'phone.regex' => 'Not valid phone',
             'phone.unique' => 'Phone already exists',
             'address.required' => 'You must enter address',
-            'address.max' => "Max length 255 symbols"
+            'address.max' => "Max length 255 symbols",
+            'date_of_birth.required' => "Date of birth required",
+            'date_of_birth.date' => "Invalid format"
         ];
     }
 }
