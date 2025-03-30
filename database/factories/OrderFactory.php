@@ -21,7 +21,7 @@ class OrderFactory extends Factory
         return [
             'client_id' => Client::all()->random(1)->first()->id,
             'status_id' => Status::all()->random(1)->first()->id,
-            'paid_at' => $this->faker->dateTime(),
+            'paid_at' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
         ];
     }
 }

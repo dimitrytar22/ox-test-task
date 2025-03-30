@@ -43,6 +43,7 @@ class OrderService
             $itemsWithQuantity[$item['item_id']] = ['quantity' => $item['quantity']];
         }
         $order->paid_at = $data['paid_at'];
+        $order->status_id = $data['status_id'];
         $order->save();
         $order->items()->sync($itemsWithQuantity);
     }

@@ -23,7 +23,7 @@ class ClientTest extends TestCase
     }
 
 
-    public function test_can_create_client(): void
+    public function test_can_store_client(): void
     {
         $clientData = [
             'full_name' => $this->faker()->name,
@@ -40,7 +40,7 @@ class ClientTest extends TestCase
         ]);
     }
 
-    public function test_can_edit_client(): void
+    public function test_can_update_client(): void
     {
         $client = Client::factory()->create();
         $newClientData = [
