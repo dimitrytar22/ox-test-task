@@ -21,8 +21,8 @@
             <div class="flex space-x-4">
 
                 <select
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="0">All statuses</option>
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 status-filter">
+                    <option value="0" >All statuses</option>
                     @foreach($statuses as $status)
                         <option value="{{$status->id}}">{{$status->title}}</option>
                     @endforeach
@@ -95,7 +95,15 @@
                 @endforeach
                 </tbody>
             </table>
-            {{$orders->links()}}
+            {{$orders->withQueryString()->links()}}
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (){
+            const statusFilter = document.querySelector('.status-filter');
+            statusFilter.addEventListener('change', function (event){
+                console.log(this.value)
+            });
+        });
+    </script>
 @endsection

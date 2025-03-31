@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\OrderFilter;
 use App\Http\Requests\Order\SearchClientRequest;
 use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
@@ -24,9 +25,9 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Client $client)
+    public function index(OrderFilter $filter, Client $client)
     {
-        $orders = $client->orders()->paginate(20);
+        $orders = $client->orders()->filter($filter)->paginate(20);
         $statuses = Status::all();
         return view('clients.orders.index', compact( 'orders','client', 'statuses'));
     }

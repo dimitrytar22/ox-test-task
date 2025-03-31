@@ -24,7 +24,9 @@
                 <div id="item_results" class="mt-2"></div>
 
                 <div id="selected_items" class="mt-4"></div>
-
+                @error('items')
+                <x-input-error :messages="$message"/>
+                @enderror
                 <label for="status_id">Select Status</label>
                 <select name="status_id" id="status_id">
                     @foreach($statuses as $status)
