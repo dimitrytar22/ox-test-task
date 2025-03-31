@@ -22,10 +22,11 @@
 
                 <form action="" class="status-filter-form" method="GET">
                     <select name="status_id"
-                        class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 status-filter">
-                        <option value="0" >All statuses</option>
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 status-filter">
+                        <option value="0">All statuses</option>
                         @foreach($statuses as $status)
-                            <option value="{{$status->id}}" {{\Illuminate\Support\Facades\Request::get('status_id') == $status->id ? "selected" : ''}}>{{$status->title}}</option>
+                            <option
+                                value="{{$status->id}}" {{\Illuminate\Support\Facades\Request::get('status_id') == $status->id ? "selected" : ''}}>{{$status->title}}</option>
                         @endforeach
                     </select>
                 </form>
@@ -54,20 +55,22 @@
 
                         <td class="px-6 py-4 text-sm text-gray-800">
                             @foreach($order->items as $item)
-                                <div class="border border-gray-300 rounded-lg m-2 p-4 bg-gray-50 shadow-sm">
-                                    <h4 class="text-md font-semibold text-gray-800">{{ $item->title }}</h4>
-                                    <p class="text-gray-600">Price: {{ $item->price }}$</p>
-                                    <p class="text-gray-600">Quantity: {{ $item->pivot->quantity }}</p>
-                                </div>
+                                <a href="{{route('orders.show', $order->id)}}">
+                                    <div class="border border-gray-300 rounded-lg m-2 p-4 bg-gray-50 shadow-sm">
+                                        <h4 class="text-md font-semibold text-gray-800">{{ $item->title }}</h4>
+                                        <p class="text-gray-600">Price: {{ $item->price }}$</p>
+                                        <p class="text-gray-600">Quantity: {{ $item->pivot->quantity }}</p>
+                                    </div>
+                                </a>
 
                             @endforeach
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-800">
-                                <p class="text-gray-600">{{ $order->status->title }}</p>
+                            <p class="text-gray-600">{{ $order->status->title }}</p>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-800">
                             @if($order->paid_at)
-                            <p class="text-gray-600">{{ $order->paid_at }}</p>
+                                <p class="text-gray-600">{{ $order->paid_at }}</p>
                             @else
                                 <p class="text-gray-600">Not paid</p>
 
@@ -101,9 +104,9 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function (){
+        document.addEventListener('DOMContentLoaded', function () {
             const statusFilter = document.querySelector('.status-filter');
-            statusFilter.addEventListener('change', function (event){
+            statusFilter.addEventListener('change', function (event) {
                 let filterForm = document.querySelector('.status-filter-form');
 
                 filterForm.submit();

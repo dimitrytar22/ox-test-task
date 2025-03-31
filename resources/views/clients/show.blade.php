@@ -6,6 +6,10 @@
 
 
 @section('content')
+    <a href="{{ url()->previous() }}"
+       class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition">
+        ← Back
+    </a>
     <div class="container mx-auto p-6">
         <div class="bg-white shadow-lg rounded-xl p-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ $client->name }}</h1>

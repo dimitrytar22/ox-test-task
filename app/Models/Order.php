@@ -27,12 +27,21 @@ class Order extends Model
         return $this->belongsToMany(Item::class, 'items_order')
             ->withPivot('quantity');
     }
+
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function scopeFilter(Builder $builder, QueryFilter $filter){
+    public function sum(): string
+    {
+        return number_format($this->items->sum(function ($item) {
+            return $item->price * $item->pivot->quantity;
+        }));
+    }
+
+    public function scopeFilter(Builder $builder, QueryFilter $filter)
+    {
         return $filter->apply($builder);
     }
 
