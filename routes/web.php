@@ -25,8 +25,10 @@ require __DIR__ . '/auth.php';
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [\App\Http\Controllers\HomeController::class,'index'])->name('home');
-    Route::get('/home', function (){return redirect()->route('home');});
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', function () {
+        return redirect()->route('home');
+    });
 
     Route::resource('clients', \App\Http\Controllers\ClientController::class);
     Route::resource('clients.orders', \App\Http\Controllers\OrderController::class)->shallow();

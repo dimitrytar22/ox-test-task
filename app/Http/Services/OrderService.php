@@ -5,7 +5,6 @@ namespace App\Http\Services;
 use App\Http\Requests\Order\SearchClientRequest;
 use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
-use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\Status;
@@ -28,6 +27,7 @@ class OrderService
             $itemsWithQuantity[$item['item_id']] = ['quantity' => $item['quantity']];
         }
         $order->paid_at = $data['paid_at'];
+
         $order->save();
         $order->items()->attach($itemsWithQuantity);
     }
@@ -38,13 +38,16 @@ class OrderService
 
         $items = $data['items'];
 
+
         $itemsWithQuantity = [];
         foreach ($items as $item) {
             $itemsWithQuantity[$item['item_id']] = ['quantity' => $item['quantity']];
         }
         $order->paid_at = $data['paid_at'];
         $order->status_id = $data['status_id'];
+
         $order->save();
+
         $order->items()->sync($itemsWithQuantity);
     }
 

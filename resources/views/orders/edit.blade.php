@@ -28,23 +28,27 @@
                         <div class="flex items-center mb-4" data-item-id="{{ $item->id }}">
                             <span class="mr-2">{{ $item->title }} ({{ $item->price }} $)</span>
                             <input type="hidden" name="items[{{ $item->id }}][item_id]" value="{{ $item->id }}">
-                            <input type="number" name="items[{{ $item->id }}][quantity]" value="{{ $item->pivot->quantity }}" min="1">
-                            <button type="button" class="ml-2 text-red-500 text-xl remove-item" data-item-id="{{ $item->id }}">&times;</button>
+                            <input type="number" name="items[{{ $item->id }}][quantity]"
+                                   value="{{ $item->pivot->quantity }}" min="1">
+                            <button type="button" class="ml-2 text-red-500 text-xl remove-item"
+                                    data-item-id="{{ $item->id }}">&times;
+                            </button>
                         </div>
                     @endforeach
-                        @error('items')
-                        <x-input-error :messages="$message"/>
-                        @enderror
-                        @error('items.*.*')
-                        <x-input-error :messages="$message"/>
-                        @enderror
+                    @error('items')
+                    <x-input-error :messages="$message"/>
+                    @enderror
+                    @error('items.*.*')
+                    <x-input-error :messages="$message"/>
+                    @enderror
 
                 </div>
 
                 <label for="status_id">Select status</label>
                 <select name="status_id" id="status_id">
                     @foreach($statuses as $status)
-                        <option value="{{$status->id}}" @if($order->status_id == $status->id) selected @endif>{{$status->title}}</option>
+                        <option value="{{$status->id}}"
+                                @if($order->status_id == $status->id) selected @endif>{{$status->title}}</option>
                     @endforeach
                 </select>
                 @error('status_id')
@@ -58,7 +62,6 @@
                 @error('paid_at')
                 <x-input-error :messages="$message"/>
                 @enderror
-
                 <div>
                     <button type="submit"
                             class="w-full mt-4 p-3 text-white bg-blue-500 font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -66,6 +69,7 @@
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 
@@ -126,7 +130,7 @@
                     <button type="button" class="ml-2 text-red-500 text-xl remove-item" data-item-id="${itemId}">&times;</button>
                 `;
                 document.getElementById('selected_items').appendChild(itemDiv);
-                selectedItems.push({ item_id: itemId, quantity: 1 });
+                selectedItems.push({item_id: itemId, quantity: 1});
             }
         }
 
@@ -158,7 +162,7 @@
                     return;
                 }
                 let quantity = parseInt(input.value);
-                selectedItems.push({ item_id: itemId, quantity: quantity });
+                selectedItems.push({item_id: itemId, quantity: quantity});
             });
 
             document.getElementById('items_json').value = JSON.stringify(selectedItems);

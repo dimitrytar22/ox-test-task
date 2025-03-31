@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
             'items.*.item_id' => 'required|exists:items,id',
             'items.*.quantity' => 'required|integer|min:1',
             'status_id' => 'required|integer|exists:statuses,id',
-            'paid_at' => ''
+            'paid_at' => '',
+
         ];
     }
 
@@ -42,7 +43,7 @@ class StoreRequest extends FormRequest
             'items.*.quantity.min' => "Quantity must be greater than 0",
             'status_id.required' => "Status is required",
             'status_id.integer' => "Status id must be int",
-            'status_id.exists' => 'Status doesn\'t exist'
+            'status_id.exists' => 'Status doesn\'t exist',
         ];
     }
 }

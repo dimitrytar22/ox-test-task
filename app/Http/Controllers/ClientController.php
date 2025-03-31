@@ -40,6 +40,7 @@ class ClientController extends Controller
         return $result ? redirect()->route('home')->with('success', 'Successfully imported clients') : redirect()->route('home');
     }
 
+
     /**
      * Store a newly created resource in storage.
      */

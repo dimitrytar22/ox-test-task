@@ -13,7 +13,8 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <h1 class="text-2xl font-semibold mb-6">Create Order</h1>
 
-            <form id="order_form" action="{{ route('clients.orders.store', $client->id) }}" method="POST" class="space-y-4">
+            <form id="order_form" action="{{ route('clients.orders.store', $client->id) }}" method="POST"
+                  class="space-y-4">
                 @csrf
 
                 <label for="item_search_input">Search Item</label>
@@ -44,6 +45,9 @@
                 @error('paid_at')
                 <x-input-error :messages="$message"/>
                 @enderror
+
+
+
 
                 <div>
                     <button type="submit"
@@ -113,7 +117,7 @@
                     <button type="button" class="ml-2 text-red-500 text-xl remove-item" data-item-id="${itemId}">&times;</button>
                 `;
                 document.getElementById('selected_items').appendChild(itemDiv);
-                selectedItems.push({ item_id: itemId, quantity: 1 });
+                selectedItems.push({item_id: itemId, quantity: 1});
             }
         }
 

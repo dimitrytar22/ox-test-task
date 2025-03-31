@@ -6,13 +6,13 @@ use App\Filters\OrderFilter;
 use App\Http\Requests\Order\SearchClientRequest;
 use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
-use App\Http\Resources\ClientResource;
 use App\Http\Services\OrderService;
 use App\Models\Client;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
