@@ -32,7 +32,7 @@
    CLIENTS_API_URL=https://my.api.mockaroo.com/clients.json
    CLIENTS_API_KEY=dc625760
 
-4. In config/database.php add new connection for test database
+4. In config/database.php there should be such connection for test database
     ```
    'testing' => [
             'driver' => 'mysql',
@@ -53,18 +53,22 @@
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-5. Set Test DB connection in phpunit.xml
+5. In phpunit.xml there should be such Test DB Connection
     ```bash
    <env name="DB_CONNECTION" value="testing"/>
    
-6. Roll migrations on both databases
+6. Generate the application key
+    ```bash
+    php artisan key:generate
+
+7. Roll migrations on both databases
     ```bash
    php artisan migrate
    php artisan migrate --database=testing
-7. Start local server
+8. Start local server
     ```bash
    php artisan serve
-8. Install frontend dependencies:
+9. Install frontend dependencies:
    ```bash
    npm install
    npm run dev
