@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('clients', \App\Http\Controllers\ClientController::class);
     Route::resource('clients.orders', \App\Http\Controllers\OrderController::class)->shallow();
 
+    Route::post('/clients/import', [\App\Http\Controllers\ClientController::class, 'import'])->name('clients.import');
     Route::post('items/search', [\App\Http\Controllers\ItemController::class, 'search'])->name('items.search');
 
 });

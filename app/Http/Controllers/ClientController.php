@@ -34,6 +34,12 @@ class ClientController extends Controller
         return view('clients.create');
     }
 
+    public function import()
+    {
+        $result = $this->service::importClients();
+        return $result ? redirect()->route('home')->with('success', 'Successfully imported clients') : redirect()->route('home');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
