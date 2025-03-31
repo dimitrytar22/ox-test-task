@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Client\StoreRequest;
 use App\Http\Requests\Client\UpdateRequest;
+use App\Http\Services\ClientsAPIService;
 use App\Http\Services\ClientService;
 use App\Models\Client;
 use Illuminate\Http\Request;

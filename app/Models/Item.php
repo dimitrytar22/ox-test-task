@@ -10,6 +10,10 @@ class Item extends Model
     use HasFactory;
 
 
+    protected  $fillable = [
+        'title',
+        'price'
+    ];
     public function order()
     {
         return $this->belongsToMany(Order::class, 'item_orders')
