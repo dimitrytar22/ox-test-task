@@ -61,8 +61,10 @@
     ```bash
    php artisan migrate
    php artisan migrate --database=testing
-
-6. Install frontend dependencies:
+7. Start local server
+    ```bash
+   php artisan serve
+8. Install frontend dependencies:
    ```bash
    npm install
    npm run dev
