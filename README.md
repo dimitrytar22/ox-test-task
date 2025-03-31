@@ -5,7 +5,7 @@
 1. Clone the repository: Clone the repository to your local machine using the command
 
    ```bash
-   git clone https://github.com/your-username/your-project-name.git
+   git clone https://github.com/dimitrytar22/ox-test-task.git
 
 2. Install dependencies
 
