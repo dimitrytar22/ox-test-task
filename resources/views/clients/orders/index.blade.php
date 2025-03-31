@@ -20,13 +20,15 @@
         <div class="flex items-center justify-between mb-4">
             <div class="flex space-x-4">
 
-                <select
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 status-filter">
-                    <option value="0" >All statuses</option>
-                    @foreach($statuses as $status)
-                        <option value="{{$status->id}}">{{$status->title}}</option>
-                    @endforeach
-                </select>
+                <form action="" class="status-filter-form" method="GET">
+                    <select name="status_id"
+                        class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 status-filter">
+                        <option value="0" >All statuses</option>
+                        @foreach($statuses as $status)
+                            <option value="{{$status->id}}" {{\Illuminate\Support\Facades\Request::get('status_id') == $status->id ? "selected" : ''}}>{{$status->title}}</option>
+                        @endforeach
+                    </select>
+                </form>
             </div>
             <a href="{{route('clients.orders.create', $client->id)}}"
                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition">Add
@@ -102,7 +104,9 @@
         document.addEventListener('DOMContentLoaded', function (){
             const statusFilter = document.querySelector('.status-filter');
             statusFilter.addEventListener('change', function (event){
-                console.log(this.value)
+                let filterForm = document.querySelector('.status-filter-form');
+
+                filterForm.submit();
             });
         });
     </script>
